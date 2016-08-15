@@ -13,17 +13,20 @@
   <link rel="stylesheet" href="css/style.css">
   <!-- endinject -->
 </head>
-<body>
+<body ng-controller="WeatherController as ctrl">
 
 <div class="container">
-  <h1>Weather App</h1>
-  <div class="input-group">
-    <input type="text" class="form-control">
-
-    <span class="input-group-btn">
-      <button class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
-    </span>
+  <div class="page-header">
+    <h1>Weather App</h1>
   </div>
+
+  <!-- Search Bar -->
+  <form class="input-group form" ng-submit="ctrl.searchCity(ctrl.inputCity)">
+    <input type="text" class="form-control" ng-model="ctrl.inputCity">
+    <span class="input-group-btn">
+      <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+    </span>
+  </form>
 
 
   <div class="row">
@@ -33,31 +36,32 @@
         <p>Current Weather</p>
         </div>
         <div class="panel-body">
-          <table class="table">
-            <tr class= "weather-label">
-              <th>Temperature(F&deg;)</th>
-              <th>Pressure</th>
-              <th>Humidity</th>
-            </tr>
-            <tr class= "weather-info">
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-          <tr class= "weather-label">
-              <th>Lowest Temp(F&deg;)</th>
-              <th>Highest Temp(F&deg;)</th>
-              <th>Wind Speed</th>
-            </tr>
-            <tr class= "weather-info">
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-          </table>
+
+          <!--City Info -->
+          <div class="row">
+            <div class="text-center city-div">
+              <img ng-src="{{ctrl.cityInfo.iconUrl}}">
+              <span class="h3 text-center">{{ctrl.cityInfo.city}}</span>
+            </div>
+            <p class="text-center">{{ctrl.cityInfo.weather}}</p>
+            <p class="text-center">{{ctrl.cityInfo.coordinates}}</p>
+          </div>
+          <hr>
+
+          <!-- Weather Info -->
+          <div class="row">
+
+            <div class="col-sm-4 col-xs-2 text-center" ng-repeat="item in ctrl.weatherInfo">
+              <label class="info-label">{{item.label}}</label>
+              <p class="info-value">{{item.value}}</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
+
+
 </div>
 
 
@@ -73,6 +77,8 @@
   <!-- endbower -->
   <!-- inject:js -->
   <script src="js/app.js"></script>
+  <script src="js/weather.controller.js"></script>
+  <script src="js/weather.factory.js"></script>
   <!-- endinject -->
 </body>
 </html>
