@@ -16,7 +16,7 @@ gulp.task('watch', function() {
     gulp.watch(htmlSources, ['html']);
 });
 
-var paths = ['./app/bower_components/','./app/js/**/*.js','./app/css/**/*.css'];
+var paths = ['./app/bower_components/','./app/js/app.js','./app/secrets/*.js','./app/js/**/*.js','./app/css/**/*.css'];
 
 gulp.task('inject', function() {
     var sources = gulp.src(paths, {read: false});

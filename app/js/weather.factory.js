@@ -5,11 +5,11 @@
         .module('app')
         .factory('weatherFactory', weatherFactory);
 
-    weatherFactory.$inject = ['$http', '$q'];
+    weatherFactory.$inject = ['$http', '$q', 'keys'];
 
     /* @ngInject */
-    function weatherFactory($http, $q) {
-        var apiKey = "c13a0d41d0cf164d3fda182b7265864c";
+    function weatherFactory($http, $q, keys) {
+        var apiKey = keys.weather;
         var baseURL = "http://api.openweathermap.org/data/2.5/weather";
 
         var service = {
