@@ -25,13 +25,12 @@
               method: 'GET',
               url: requestURL
             }).then(function(response) {
-                //console.log(response);
                 return response.data;
               }, function(response) {
-                //TODO: Toast with error message
-                //console.log(response);
+                return "Could not connect to server.";
               });
-
         }
+
     }
+
 })();

@@ -5,10 +5,10 @@
         .module('app')
         .controller('WeatherController', WeatherController);
 
-    WeatherController.$inject = ['weatherFactory'];
+    WeatherController.$inject = ['weatherFactory', toastr];
 
     /* @ngInject */
-    function WeatherController(weatherFactory) {
+    function WeatherController(weatherFactory, toastr) {
         var vm = this;
         vm.cityInfo = {};
         vm.weatherInfo = [];
@@ -29,7 +29,10 @@
         function getWeather(city) {
             weatherFactory.getWeather(city).then(
                 function(data){
-                    //console.log(data);
+                    if (data.cod === "404") {
+                        showError("City not found!");
+                        return;
+                    }
 
                     // update cityInfo array
                     vm.cityInfo = {
@@ -55,7 +58,8 @@
                         time : Date.now()
                     });
 
-                    
+                }, function(errorMsg) {
+                    showError(errorMsg);
                 }
             );
         }
@@ -64,12 +68,12 @@
         function searchCity() {
             //TODO: add validation
             getWeather(vm.inputCity);
-
-
             vm.inputCity = "";
-
         }
 
+        function showError(errorMsg) {
+            toastr.error(errorMsg, "Error");
+        }
 
     }
 })();

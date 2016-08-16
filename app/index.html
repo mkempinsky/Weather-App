@@ -8,6 +8,7 @@
 
   <!-- bower:css -->
   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+  <link rel="stylesheet" href="bower_components/angular-toastr/dist/angular-toastr.css" />
   <!-- endbower -->
   <!-- inject:css -->
   <link rel="stylesheet" href="css/style.css">
@@ -20,7 +21,7 @@
     <h1>Weather App</h1>
   </div>
 
-  <!-- Top Citites -->
+  <!-- Top Cities -->
   <span class="btn-group">
     <span ng-repeat="city in ctrl.topCities">
     <button class="btn btn-info" type="button" ng-click="ctrl.getWeather(city)">{{city}}</button>
@@ -66,7 +67,7 @@
         </div>
       </div>
     </div>
-  
+
 
     <!-- Search History -->
     <div class="col-sm-6">
@@ -76,7 +77,7 @@
         </div>
           <div class="panel-body">
             <table class="table table-striped">
-              <tr ng-repeat="item in ctrl.searchHistory | orderBy: item.time : true " >
+              <tr ng-repeat="item in ctrl.searchHistory | orderBy: item.time : true" >
                 <td class="search-term">{{item.city}}</td>
                 <td class="timestamp">{{item.time | date: "MM/dd/yy hh:mm:ss a"}}</td>
               </tr>
@@ -84,8 +85,8 @@
           </div>
         </div>
       </div>
- 
-  </div> 
+
+  </div>
 
 </div>
 
@@ -97,6 +98,7 @@
   <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/jquery/dist/jquery.js"></script>
   <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+  <script src="bower_components/angular-toastr/dist/angular-toastr.tpls.js"></script>
   <!-- endbower -->
   <!-- inject:js -->
   <script src="js/app.js"></script>
