@@ -5,10 +5,10 @@
         .module('app')
         .factory('weatherFactory', weatherFactory);
 
-    weatherFactory.$inject = ['$http'];
+    weatherFactory.$inject = ['$http', '$q'];
 
     /* @ngInject */
-    function weatherFactory($http) {
+    function weatherFactory($http, $q) {
         var apiKey = "c13a0d41d0cf164d3fda182b7265864c";
         var baseURL = "http://api.openweathermap.org/data/2.5/weather";
 
@@ -21,14 +21,27 @@
         function getWeather(city) {
             var query = '?q=' + city + '&appid=' + apiKey + '&units=imperial';
             var requestURL = baseURL + query;
-            return $http({
+
+            var defer = $q.defer();
+
+            $http({
               method: 'GET',
               url: requestURL
             }).then(function(response) {
-                return response.data;
+
+                if (response.data.cod == "404") {
+                    defer.reject("Could not find city!");
+                } else if (response.data.cod != "200") {
+                    defer.reject("Could not retrieve data.");
+                }
+
+                defer.resolve(response.data);
               }, function(response) {
-                return "Could not connect to server.";
-              });
+                defer.reject("Could not connect to server.");
+              }
+            );
+
+            return defer.promise;
         }
 
     }
