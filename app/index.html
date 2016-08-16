@@ -78,7 +78,7 @@
           <div class="panel-body">
             <table class="table table-striped">
               <tr ng-repeat="item in ctrl.searchHistory | orderBy: item.time : true" >
-                <td class="search-term">{{item.city}}</td>
+                <td class="search-term" ng-click="ctrl.getWeather(item.city)">{{item.city}}</td>
                 <td class="timestamp">{{item.time | date: "MM/dd/yy hh:mm:ss a"}}</td>
               </tr>
             </table>

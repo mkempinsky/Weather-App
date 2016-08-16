@@ -16,7 +16,7 @@
         vm.searchCity = searchCity;
         vm.inputCity = "";
         vm.searchHistory = [];
-        vm.topCities = ["San Diego", "New York", "Washington D.C.", "London", "Tokyo"];
+        vm.topCities = ["San Diego", "New York", "Washington, D.C.", "London", "Tokyo"];
 
 
 
@@ -28,6 +28,7 @@
 
         function getWeather(city) {
             weatherFactory.getWeather(city).then(
+                //success callback
                 function(data){
                     // update cityInfo array
                     vm.cityInfo = {
@@ -53,7 +54,9 @@
                         time : Date.now()
                     });
 
-                }, function(errorMsg) {
+                }, 
+                // error callback
+                function(errorMsg) {
                     toastr.error(errorMsg, "Error");
                 }
             );
