@@ -5,3 +5,11 @@ form {
 .city-div {
   padding-right: 50px;
 }
+
+.search-term{
+	width: 60%;
+}
+
+.btn-group{
+	padding-bottom: 5px;
+}

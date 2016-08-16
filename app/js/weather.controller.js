@@ -15,17 +15,21 @@
         vm.getWeather = getWeather;
         vm.searchCity = searchCity;
         vm.inputCity = "";
+        vm.searchHistory = [];
+        vm.topCities = ["San Diego", "New York", "Washington D.C.", "London", "Tokyo"];
+
+
 
         activate();
 
         function activate() {
-            getWeather("Seattle");
+            getWeather("San Diego");
         }
 
         function getWeather(city) {
             weatherFactory.getWeather(city).then(
                 function(data){
-                    console.log(data);
+                    //console.log(data);
 
                     // update cityInfo array
                     vm.cityInfo = {
@@ -45,13 +49,25 @@
                         {label: "High Temperature", value: main.temp_min + " F"},
                         {label: "Wind Speed", value: data.wind.speed + " mph"},
                     ];
+
+                    vm.searchHistory.push({
+                        city : data.name,
+                        time : Date.now()
+                    });
+
+                    
                 }
             );
         }
 
-        function searchCity(city) {
+
+        function searchCity() {
             //TODO: add validation
-            getWeather(city);
+            getWeather(vm.inputCity);
+
+
+            vm.inputCity = "";
+
         }
 
 

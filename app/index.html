@@ -20,8 +20,15 @@
     <h1>Weather App</h1>
   </div>
 
+  <!-- Top Citites -->
+  <span class="btn-group">
+    <span ng-repeat="city in ctrl.topCities">
+    <button class="btn btn-info" type="button" ng-click="ctrl.getWeather(city)">{{city}}</button>
+    </span>
+  </span>
+
   <!-- Search Bar -->
-  <form class="input-group form" ng-submit="ctrl.searchCity(ctrl.inputCity)">
+  <form class="input-group form" ng-submit="ctrl.searchCity()">
     <input type="text" class="form-control" ng-model="ctrl.inputCity">
     <span class="input-group-btn">
       <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
@@ -59,12 +66,28 @@
         </div>
       </div>
     </div>
-  </div>
+  
 
+    <!-- Search History -->
+    <div class="col-sm-6">
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <p>Search History</p>
+        </div>
+          <div class="panel-body">
+            <table class="table table-striped">
+              <tr ng-repeat="item in ctrl.searchHistory | orderBy: item.time : true " >
+                <td class="search-term">{{item.city}}</td>
+                <td class="timestamp">{{item.time | date: "MM/dd/yy hh:mm:ss a"}}</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+ 
+  </div> 
 
 </div>
-
-
 
 
 
